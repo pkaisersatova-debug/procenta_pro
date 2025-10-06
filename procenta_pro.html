@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <!-- Zajištění správného zobrazení diakritiky (Oprava kódování) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procenta ve zdravotnictví - Interaktivní pracovní list PRO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 250px; /* Standardizovaná výška pro grafy */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .table-input {
+            width: 100%;
+            padding: 4px;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+            text-align: center;
+        }
+        .correct { background-color: #d1fae5; } /* green-100 */
+        .incorrect { background-color: #fee2e2; } /* red-100 */
+        .syringe-tick-small { stroke: #64748b; stroke-width: 1; }
+        .syringe-tick-mid { stroke: #64748b; stroke-width: 1.5; }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
+
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-sky-800">Procenta ve zdravotnictví</h1>
+            <p class="mt-2 text-lg text-slate-600">Interaktivní pracovní list s rozšířenými úlohami a testem</p>
+        </header>
+
+        <!-- Navigace - Aktualizováno pro nové sekce -->
+        <nav class="bg-white/70 backdrop-blur-md sticky top-4 z-10 rounded-xl shadow-sm mb-8 md:mb-12 border border-slate-200">
+            <ul class="flex flex-wrap items-center justify-center p-2 text-sm space-x-2 md:space-x-4">
+                <li><a href="#teorie" class="font-medium text-slate-700 hover:text-sky-700 transition-colors px-1 py-2 rounded-md">Teorie</a></li>
+                <li><a href="#cviceni-prevody" class="font-medium text-slate-700 hover:text-sky-700 transition-colors px-1 py-2 rounded-md">Cvičení 1</a></li>
+                <li><a href="#cviceni-vizualni" class="font-medium text-slate-700 hover:text-sky-700 transition-colors px-1 py-2 rounded-md">Cvičení 2</a></li>
+                <li><a href="#cviceni-rychle" class="font-medium text-slate-700 hover:text-sky-700 transition-colors px-1 py-2 rounded-md">Cvičení 3</a></li>
+                <li><a href="#ulohy" class="font-medium text-slate-700 hover:text-sky-700 transition-colors px-1 py-2 rounded-md">Praxe</a></li>
+                <li><a href="#cviceni-rozsirene" class="font-medium text-slate-700 hover:text-sky-700 transition-colors px-1 py-2 rounded-md">Procvičování</a></li>
+                <li><a href="#slovnik" class="font-medium text-slate-700 hover:text-sky-700 transition-colors px-1 py-2 rounded-md">Slovník</a></li>
+                <li><a href="#test" class="font-medium text-slate-700 hover:text-sky-700 transition-colors px-1 py-2 rounded-md">Test</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <!-- SEKCE I: Teorie -->
+            <section id="teorie" class="mb-12 scroll-mt-24">
+                <h2 class="text-2xl font-bold text-sky-700 mb-6 text-center">I. Teoretický přehled</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-slate-100 lg:col-span-2">
+                        <h3 class="font-bold text-lg mb-3 text-slate-800">Procento (%) a Promile (‰) - Definice a Převody</h3>
+                        <p class="text-slate-600 mb-4">
+                            <strong class="text-sky-700">Procento (%)</strong> představuje bezrozměrnou jednotku vyjadřující **jednu setinu celku** (1/100).
+                        </p>
+                        <ul class="list-disc list-inside text-slate-600 space-y-2 mb-4 pl-4">
+                            <li><strong>Procento na desetinné číslo:</strong> Procentní hodnotu dělíme číslem 100. Příklad: **42%** je **0,42**.</li>
+                            <li><strong>Promile (‰):</strong> Vyjadřuje jednu tisícinu celku (1/1000). To je jedna desetina procenta. Příklad: **2‰** je **0,2%** nebo **0,002**.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-slate-100">
+                        <h3 class="font-bold text-lg mb-2 text-slate-800">Tři základní složky</h3>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 pl-4 mt-2">
+                            <li><strong class="font-semibold">Základ (100%):</strong> Celkové množství.</li>
+                            <li><strong class="font-semibold">Počet procent (p):</strong> Číslo se značkou %.</li>
+                            <li><strong class="font-semibold">Procentová část (P):</strong> Část základu.</li>
+                        </ul>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl shadow-md border border-slate-100">
+                        <h3 class="font-bold text-lg mb-2 text-slate-800">Praktické využití</h3>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 pl-4 mt-2">
+                            <li><strong>Koncentrace látek:</strong> Podíl účinné látky v roztoku (např. 0,9% NaCl).</li>
+                            <li><strong>Měření změn:</strong> Sledování fyziologických změn.</li>
+                            <li><strong>Statistika:</strong> Vyhodnocení výsledků (např. úspěšnost léčby).</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-slate-100 lg:col-span-2 md:col-span-2 lg:col-start-2">
+                        <h3 class="font-bold text-lg mb-2 text-slate-800">Výpočet procentové části</h3>
+                        <p class="text-slate-600 mb-3">P = Základ (Z) × (Počet procent (p) / 100)</p>
+                        <p class="text-base bg-sky-100 text-sky-800 font-mono p-3 rounded-md text-center shadow-inner">
+                            P = Z × p/100
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SEKCE II: Cvičení 1: Převody -->
+            <section id="cviceni-prevody" class="mb-12 scroll-mt-24">
+                <h2 class="text-2xl font-bold text-sky-700 mb-6 text-center">II. Cvičení 1: Převody procent a zlomků</h2>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-100 max-w-4xl mx-auto">
+                    <!-- Tabulka převodů (Implementace v JS zůstává stejná) -->
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Zlomek (např. 1/4)</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Desetinné číslo</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Procenta (jen číslo)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prevodyBody" class="bg-white divide-y divide-slate-200">
+                             <tr><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="fraction" data-correct="1/100" class="table-input"></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="decimal" data-correct="0.01" class="table-input"></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="percent" data-correct="1" value="1" class="table-input" readonly></td></tr>
+                             <tr><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="fraction" data-correct="1/20" value="1/20" class="table-input" readonly></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="decimal" data-correct="0.05" class="table-input"></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="percent" data-correct="5" class="table-input"></td></tr>
+                             <tr><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="fraction" data-correct="1/2" class="table-input"></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="decimal" data-correct="0.5" value="0.5" class="table-input" readonly></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="percent" data-correct="50" class="table-input"></td></tr>
+                             <tr><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="fraction" data-correct="3/4" class="table-input"></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="decimal" data-correct="0.75" class="table-input"></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="percent" data-correct="75" value="75" class="table-input" readonly></td></tr>
+                             <tr><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="fraction" data-correct="1" value="1" class="table-input" readonly></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="decimal" data-correct="1" class="table-input"></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="percent" data-correct="100" class="table-input"></td></tr>
+                             <tr><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="fraction" data-correct="5/2" class="table-input"></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="decimal" data-correct="2.5" value="2.5" class="table-input" readonly></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="percent" data-correct="250" class="table-input"></td></tr>
+                             <tr><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="fraction" data-correct="4/25" class="table-input"></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="decimal" data-correct="0.16" class="table-input"></td><td class="px-3 py-2 whitespace-nowrap"><input type="text" data-type="percent" data-correct="16" value="16" class="table-input" readonly></td></tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-6 flex justify-center"><button id="checkPrevodyBtn" class="bg-teal-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-teal-700 transition-colors">Zkontrolovat</button></div>
+                    <div id="prevodyFeedback" class="mt-4 text-center font-semibold hidden"></div>
+                </div>
+            </section>
+            
+            <!-- SEKCE III: Cvičení 2: Vizuální odhad -->
+            <section id="cviceni-vizualni" class="mb-12 scroll-mt-24">
+                <h2 class="text-2xl font-bold text-sky-700 mb-6 text-center">III. Cvičení 2: Vizuální odhad koncentrace (Stříkačka)</h2>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-100 max-w-4xl mx-auto">
+                     <div id="syringeQuestions" class="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
+                        <!-- Otázky stříkačka (Ponecháno beze změn) -->
+                        <div class="flex flex-col items-center space-y-2"><div class="syringe-display"><svg width="40" height="220" viewBox="0 0 40 220" class="block"><title>Stříkačka 50%</title><rect x="5" y="110" width="30" height="100" fill="#22d3ee" rx="4" ry="4" /><rect x="5" y="10" width="30" height="200" fill="none" stroke="#64748b" stroke-width="2" rx="4" ry="4"/><line x1="35" y1="190" x2="40" y2="190" class="syringe-tick-small" /><line x1="35" y1="170" x2="40" y2="170" class="syringe-tick-small" /><line x1="35" y1="150" x2="40" y2="150" class="syringe-tick-small" /><line x1="35" y1="130" x2="40" y2="130" class="syringe-tick-small" /><line x1="35" y1="110" x2="40" y2="110" class="syringe-tick-mid" stroke-width="2" /><line x1="35" y1="90" x2="40" y2="90" class="syringe-tick-small" /><line x1="35" y1="70" x2="40" y2="70" class="syringe-tick-small" /><line x1="35" y1="50" x2="40" y2="50" class="syringe-tick-small" /><line x1="35" y1="30" x2="40" y2="30" class="syringe-tick-small" /></svg></div><label class="mt-2 text-sm font-medium text-slate-700">Odpověď (%)</label><input type="number" data-correct="50" class="syringe-input table-input w-20" placeholder="50"></div>
+                        <div class="flex flex-col items-center space-y-2"><div class="syringe-display"><svg width="40" height="220" viewBox="0 0 40 220" class="block"><title>Stříkačka 25%</title><rect x="5" y="160" width="30" height="50" fill="#22d3ee" rx="4" ry="4" /><rect x="5" y="10" width="30" height="200" fill="none" stroke="#64748b" stroke-width="2" rx="4" ry="4"/><line x1="35" y1="190" x2="40" y2="190" class="syringe-tick-small" /><line x1="35" y1="170" x2="40" y2="170" class="syringe-tick-small" /><line x1="35" y1="150" x2="40" y2="150" class="syringe-tick-small" /><line x1="35" y1="130" x2="40" y2="130" class="syringe-tick-small" /><line x1="35" y1="110" x2="40" y2="110" class="syringe-tick-mid" stroke-width="2" /><line x1="35" y1="90" x2="40" y2="90" class="syringe-tick-small" /><line x1="35" y1="70" x2="40" y2="70" class="syringe-tick-small" /><line x1="35" y1="50" x2="40" y2="50" class="syringe-tick-small" /><line x1="35" y1="30" x2="40" y2="30" class="syringe-tick-small" /></svg></div><label class="mt-2 text-sm font-medium text-slate-700">Odpověď (%)</label><input type="number" data-correct="25" class="syringe-input table-input w-20" placeholder="25"></div>
+                        <div class="flex flex-col items-center space-y-2"><div class="syringe-display"><svg width="40" height="220" viewBox="0 0 40 220" class="block"><title>Stříkačka 75%</title><rect x="5" y="60" width="30" height="150" fill="#22d3ee" rx="4" ry="4" /><rect x="5" y="10" width="30" height="200" fill="none" stroke="#64748b" stroke-width="2" rx="4" ry="4"/><line x1="35" y1="190" x2="40" y2="190" class="syringe-tick-small" /><line x1="35" y1="170" x2="40" y2="170" class="syringe-tick-small" /><line x1="35" y1="150" x2="40" y2="150" class="syringe-tick-small" /><line x1="35" y1="130" x2="40" y2="130" class="syringe-tick-small" /><line x1="35" y1="110" x2="40" y2="110" class="syringe-tick-mid" stroke-width="2" /><line x1="35" y1="90" x2="40" y2="90" class="syringe-tick-small" /><line x1="35" y1="70" x2="40" y2="70" class="syringe-tick-small" /><line x1="35" y1="50" x2="40" y2="50" class="syringe-tick-small" /><line x1="35" y1="30" x2="40" y2="30" class="syringe-tick-small" /></svg></div><label class="mt-2 text-sm font-medium text-slate-700">Odpověď (%)</label><input type="number" data-correct="75" class="syringe-input table-input w-20" placeholder="75"></div>
+                        <div class="flex flex-col items-center space-y-2"><div class="syringe-display"><svg width="40" height="220" viewBox="0 0 40 220" class="block"><title>Stříkačka 10%</title><rect x="5" y="190" width="30" height="20" fill="#22d3ee" rx="4" ry="4" /><rect x="5" y="10" width="30" height="200" fill="none" stroke="#64748b" stroke-width="2" rx="4" ry="4"/><line x1="35" y1="190" x2="40" y2="190" class="syringe-tick-small" /><line x1="35" y1="170" x2="40" y2="170" class="syringe-tick-small" /><line x1="35" y1="150" x2="40" y2="150" class="syringe-tick-small" /><line x1="35" y1="130" x2="40" y2="130" class="syringe-tick-small" /><line x1="35" y1="110" x2="40" y2="110" class="syringe-tick-mid" stroke-width="2" /><line x1="35" y1="90" x2="40" y2="90" class="syringe-tick-small" /><line x1="35" y1="70" x2="40" y2="70" class="syringe-tick-small" /><line x1="35" y1="50" x2="40" y2="50" class="syringe-tick-small" /><line x1="35" y1="30" x2="40" y2="30" class="syringe-tick-small" /></svg></div><label class="mt-2 text-sm font-medium text-slate-700">Odpověď (%)</label><input type="number" data-correct="10" class="syringe-input table-input w-20" placeholder="10"></div>
+                    </div>
+                    <div class="mt-8 flex justify-center"><button id="checkSyringeBtn" class="bg-teal-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-teal-700 transition-colors">Zkontrolovat Vizuální Úlohy</button></div>
+                    <div id="syringeFeedback" class="mt-4 text-center font-semibold hidden"></div>
+                </div>
+            </section>
+            
+            <!-- SEKCE IV: Cvičení 3: Rychlé určení základních procent -->
+            <section id="cviceni-rychle" class="mb-12 scroll-mt-24">
+                <h2 class="text-2xl font-bold text-sky-700 mb-6 text-center">IV. Cvičení 3: Rychlé určení základních procent</h2>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-100 max-w-4xl mx-auto overflow-x-auto">
+                    <!-- Tabulka rychlých procent (Implementace v JS zůstává stejná) -->
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider sticky left-0 bg-slate-50 border-r border-slate-200">Základ (100%)</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider">1%</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider">5%</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider">10%</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider">25%</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider">50%</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider">200%</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rychleProcentaBody" class="bg-white divide-y divide-slate-200">
+                            <!-- Data rows will be generated by JS -->
+                        </tbody>
+                    </table>
+                    <div class="mt-6 flex justify-center"><button id="checkRychleBtn" class="bg-teal-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-teal-700 transition-colors">Zkontrolovat Tabulku</button></div>
+                    <div id="rychleFeedback" class="mt-4 text-center font-semibold hidden"></div>
+                </div>
+            </section>
+
+
+            <!-- SEKCE V: Interaktivní úlohy (Praxe) -->
+            <section id="ulohy" class="mb-12 scroll-mt-24">
+                <h2 class="text-2xl font-bold text-sky-700 mb-8 text-center">V. Interaktivní úlohy z oboru (Praxe)</h2>
+                
+                <div class="space-y-8">
+                    
+                    <!-- Úloha 1: Koncentrace roztoku - s Pie Chart -->
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-100">
+                        <h3 class="font-bold text-xl mb-1 text-sky-900">1. Kalkulátor koncentrace infuzního roztoku (Objem: 100%)</h3>
+                        <p class="text-slate-600 mb-6">Vypočítejte, kolik gramů účinné látky se nachází v roztoku. V grafu vidíte poměr účinné látky a rozpouštědla.</p>
+                        <div class="grid lg:grid-cols-2 gap-8 items-start">
+                             <form id="koncentraceForm" class="grid sm:grid-cols-2 gap-4 items-end">
+                                <div>
+                                    <label for="objemRoztoku" class="block text-sm font-medium text-slate-700">Objem roztoku (ml)</label>
+                                    <input type="number" id="objemRoztoku" value="500" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2">
+                                </div>
+                                <div>
+                                    <label for="koncentraceProcent" class="block text-sm font-medium text-slate-700">Koncentrace (%)</label>
+                                    <input type="number" step="0.1" id="koncentraceProcent" value="0.9" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <button type="submit" class="w-full sm:w-auto bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-sky-700 transition-colors">Vypočítat a vizualizovat</button>
+                                </div>
+                                <div id="vysledekKoncentrace" class="mt-6 bg-sky-50 border-l-4 border-sky-500 p-4 rounded-r-lg hidden sm:col-span-2">
+                                    <p class="font-semibold text-sky-800">Výsledek:</p>
+                                    <p class="text-lg text-sky-900" id="textVysledekKoncentrace"></p>
+                                </div>
+                            </form>
+                            <div class="chart-container">
+                                <canvas id="koncentraceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Úloha 2: Změna hmotnosti - s Bar Chart -->
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-100">
+                        <h3 class="font-bold text-xl mb-1 text-sky-900">2. Kalkulátor změny hmotnosti pacienta</h3>
+                        <p class="text-slate-600 mb-6">Vypočítejte novou hmotnost pacienta po procentuálním úbytku nebo přírůstku.</p>
+                        <div class="grid lg:grid-cols-2 gap-8 items-start">
+                            <form id="hmotnostForm" class="grid sm:grid-cols-3 gap-4 items-end">
+                                <div>
+                                    <label for="puvodniHmotnost" class="block text-sm font-medium text-slate-700">Původní hmotnost (kg)</label>
+                                    <input type="number" id="puvodniHmotnost" value="92" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2">
+                                </div>
+                                <div>
+                                    <label for="procentualniZmena" class="block text-sm font-medium text-slate-700">Změna (%)</label>
+                                    <input type="number" step="0.1" id="procentualniZmena" value="3.5" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2">
+                                </div>
+                                <div>
+                                    <label for="typZmeny" class="block text-sm font-medium text-slate-700">Typ změny</label>
+                                    <select id="typZmeny" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2">
+                                        <option value="ubytek">Úbytek</option>
+                                        <option value="prirustek">Přírůstek</option>
+                                    </select>
+                                </div>
+                                <div class="sm:col-span-3">
+                                    <button type="submit" class="w-full sm:w-auto bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-sky-700 transition-colors">Vypočítat a vizualizovat</button>
+                                </div>
+                                <div id="vysledekHmotnost" class="mt-6 bg-sky-50 border-l-4 border-sky-500 p-4 rounded-r-lg hidden sm:col-span-3">
+                                    <p class="font-semibold text-sky-800">Výsledek:</p>
+                                    <p class="text-lg text-sky-900" id="textVysledekHmotnost"></p>
+                                </div>
+                            </form>
+                            <div class="chart-container">
+                                <canvas id="hmotnostChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Úloha 3: Tepová frekvence -->
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-100">
+                        <div class="grid lg:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h3 class="font-bold text-xl mb-1 text-sky-900">3. Analýza tepové frekvence</h3>
+                                <p class="text-slate-600 mb-6">Zjistěte procentuální nárůst tepové frekvence.</p>
+                                <form id="tepForm">
+                                    <div class="grid sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="klidovyTep" class="block text-sm font-medium text-slate-700">Klidová TF (tepů/min)</label>
+                                            <input type="number" id="klidovyTep" value="72" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2">
+                                        </div>
+                                        <div>
+                                            <label for="zatezovyTep" class="block text-sm font-medium text-slate-700">Zátěžová TF (tepů/min)</label>
+                                            <input type="number" id="zatezovyTep" value="108" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="mt-4 w-full sm:w-auto bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-sky-700 transition-colors">Analyzovat</button>
+                                </form>
+                                <div id="vysledekTep" class="mt-6 bg-sky-50 border-l-4 border-sky-500 p-4 rounded-r-lg hidden">
+                                    <p class="font-semibold text-sky-800">Výsledek:</p>
+                                    <p class="text-lg text-sky-900" id="textVysledekTep"></p>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="tepChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Úloha 4: Ředění roztoku -->
+                     <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-100">
+                        <h3 class="font-bold text-xl mb-1 text-sky-900">4. Kalkulátor ředění dezinfekce</h3>
+                        <p class="text-slate-600 mb-6">Vypočítejte, kolik mililitrů koncentrátu je potřeba k přípravě roztoku o daném objemu a cílové koncentraci.</p>
+                        <form id="redeniForm" class="grid sm:grid-cols-2 gap-4 items-end">
+                            <div>
+                                <label for="cilovyObjem" class="block text-sm font-medium text-slate-700">Cílový objem roztoku (L)</label>
+                                <input type="number" step="0.1" id="cilovyObjem" value="3" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2">
+                            </div>
+                            <div>
+                                <label for="cilovaKoncentrace" class="block text-sm font-medium text-slate-700">Cílová koncentrace (%)</label>
+                                <input type="number" step="0.1" id="cilovaKoncentrace" value="0.5" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <button type="submit" class="w-full sm:w-auto bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-sky-700 transition-colors">Vypočítat</button>
+                            </div>
+                        </form>
+                        <div id="vysledekRedeni" class="mt-6 bg-sky-50 border-l-4 border-sky-500 p-4 rounded-r-lg hidden">
+                            <p class="font-semibold text-sky-800">Výsledek:</p>
+                            <p class="text-lg text-sky-900" id="textVysledekRedeni"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            
+            <!-- SEKCE VI: Rozšířené Procvičování (NOVÉ SEKCE) -->
+            <section id="cviceni-rozsirene" class="mb-12 scroll-mt-24">
+                <h2 class="text-2xl font-bold text-sky-700 mb-6 text-center">VI. Rozšířené Procvičování (Základ a Část)</h2>
+                
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-100 max-w-4xl mx-auto">
+                    
+                    <!-- Cvičení 5: Výpočet základu - OPRAVENO ZNÁK $ -->
+                    <h3 class="font-bold text-xl mb-4 text-slate-800 border-b pb-2">Cvičení 5: Vypočítejte Základ (100%)</h3>
+                    <form id="cviceni5Form" class="exercise-grid mb-6">
+                        <div class="flex flex-col space-y-2">
+                            <label class="font-medium text-slate-700">1. 27% je 151.2 g. Základ je:</label>
+                            <input type="number" step="0.01" data-correct="560" data-unit="g" class="table-input cv5-input w-full" placeholder="Základ (g)">
+                            <div class="feedback cv5-feedback-1 text-sm mt-1"></div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <label class="font-medium text-slate-700">2. 91% je 118.3. Základ je:</label>
+                            <input type="number" step="0.01" data-correct="130" data-unit="" class="table-input cv5-input w-full" placeholder="Základ">
+                            <div class="feedback cv5-feedback-2 text-sm mt-1"></div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <label class="font-medium text-slate-700">3. 220% je 68 mm. Základ je:</label>
+                            <input type="number" step="0.01" data-correct="30.91" data-unit="mm" class="table-input cv5-input w-full" placeholder="Základ (mm)">
+                            <div class="feedback cv5-feedback-3 text-sm mt-1"></div>
+                        </div>
+                    </form>
+                    
+                    <!-- Cvičení 6: Výpočet procentové části - OPRAVENO ZNÁK $ -->
+                    <h3 class="font-bold text-xl mb-4 text-slate-800 border-b pb-2 pt-6">Cvičení 6: Vypočítejte Procentovou Část</h3>
+                    <form id="cviceni6Form" class="exercise-grid mb-6">
+                        <div class="flex flex-col space-y-2">
+                            <label class="font-medium text-slate-700">1. 27% z 130 Kč je:</label>
+                            <input type="number" step="0.01" data-correct="35.1" data-unit="Kč" class="table-input cv6-input w-full" placeholder="Část (Kč)">
+                            <div class="feedback cv6-feedback-1 text-sm mt-1"></div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <label class="font-medium text-slate-700">2. 210% z 360 kg je:</label>
+                            <input type="number" step="0.01" data-correct="756" data-unit="kg" class="table-input cv6-input w-full" placeholder="Část (kg)">
+                            <div class="feedback cv6-feedback-2 text-sm mt-1"></div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <label class="font-medium text-slate-700">3. 60% z 60 m je:</label>
+                            <input type="number" step="0.01" data-correct="36" data-unit="m" class="table-input cv6-input w-full" placeholder="Část (m)">
+                            <div class="feedback cv6-feedback-3 text-sm mt-1"></div>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-8 flex justify-center">
+                        <button id="checkCviceniRozsireneBtn" class="bg-sky-600 text-white font-semibold py-2 px-8 rounded-lg hover:bg-sky-700 transition-colors shadow-lg">Zkontrolovat obě cvičení</button>
+                    </div>
+                    <div id="rozsireneFeedback" class="mt-4 text-center font-semibold hidden"></div>
+                </div>
+            </section>
+
+            
+            <!-- SEKCE VII: Odborný slovník (Přesunuto z VI) -->
+            <section id="slovnik" class="mb-12 scroll-mt-24">
+                <h2 class="text-2xl font-bold text-sky-700 mb-6 text-center">VII. Odborný slovník</h2>
+                <p class="text-slate-600 mb-6 text-center max-w-2xl mx-auto">Základní terminologie spojená s výpočty a zdravotnickou péčí, jak ji můžete potkat v praxi.</p>
+
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-100 max-w-xl mx-auto overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Česky</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Latinsky (často užíváno)</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Anglicky</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-200 text-slate-700">
+                             <tr><td class="px-3 py-2 whitespace-nowrap">Roztok</td><td class="px-3 py-2 whitespace-nowrap">Solutio</td><td class="px-3 py-2 whitespace-nowrap">Solution</td></tr>
+                             <tr><td class="px-3 py-2 whitespace-nowrap">Koncentrace</td><td class="px-3 py-2 whitespace-nowrap">Concentratio</td><td class="px-3 py-2 whitespace-nowrap">Concentration</td></tr>
+                             <tr><td class="px-3 py-2 whitespace-nowrap">Dávka</td><td class="px-3 py-2 whitespace-nowrap">Dosis</td><td class="px-3 py-2 whitespace-nowrap">Dose, Dosage</td></tr>
+                             <tr><td class="px-3 py-2 whitespace-nowrap">Váha / Hmotnost</td><td class="px-3 py-2 whitespace-nowrap">Pondus / Massa</td><td class="px-3 py-2 whitespace-nowrap">Weight / Mass</td></tr>
+                             <tr><td class="px-3 py-2 whitespace-nowrap">Srdce</td><td class="px-3 py-2 whitespace-nowrap">Cor</td><td class="px-3 py-2 whitespace-nowrap">Heart</td></tr>
+                             <tr><td class="px-3 py-2 whitespace-nowrap">Tepová frekvence</td><td class="px-3 py-2 whitespace-nowrap">Frequentia pulsus</td><td class="px-3 py-2 whitespace-nowrap">Heart rate</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SEKCE VIII: Závěrečný test (Přesunuto z VII) -->
+            <section id="test" class="mb-12 scroll-mt-24">
+                <h2 class="text-2xl font-bold text-sky-700 mb-6 text-center">VIII. Závěrečný test: Prověřte své znalosti</h2>
+                <p class="text-slate-600 mb-8 text-center max-w-2xl mx-auto">Odpovězte na pět otázek, které shrnují nejdůležitější znalosti z lekce. Po dokončení stiskněte "Vyhodnotit test".</p>
+                
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-100 max-w-3xl mx-auto">
+                    <form id="finalTestForm" class="space-y-6">
+                        
+                        <!-- Otázka 1: Definice % -->
+                        <div class="border-b pb-4">
+                            <p class="font-semibold text-slate-800 mb-2">1. Co znamená procento (1%)?</p>
+                            <div class="space-y-1">
+                                <label class="block"><input type="radio" name="q1" value="A"> Jedna tisícina celku.</label>
+                                <label class="block"><input type="radio" name="q1" value="B"> Jedna setina celku.</label>
+                                <label class="block"><input type="radio" name="q1" value="C"> Desetina celku.</label>
+                            </div>
+                            <div class="feedback q1-feedback text-sm mt-1"></div>
+                        </div>
+
+                        <!-- Otázka 2: Převod na promile -->
+                        <div class="border-b pb-4">
+                            <p class="font-semibold text-slate-800 mb-2">2. Desetinné číslo 0,005 odpovídá jaké hodnotě v promilích (‰)?</p>
+                            <div class="space-y-1">
+                                <label class="block"><input type="radio" name="q2" value="A"> 0,5 ‰</label>
+                                <label class="block"><input type="radio" name="q2" value="B"> 5 ‰</label>
+                                <label class="block"><input type="radio" name="q2" value="C"> 50 ‰</label>
+                            </div>
+                            <div class="feedback q2-feedback text-sm mt-1"></div>
+                        </div>
+                        
+                        <!-- Otázka 3: Výpočet procentové části -->
+                        <div class="border-b pb-4">
+                            <p class="font-semibold text-slate-800 mb-2">3. Kolik miligramů (mg) účinné látky je v 20 ml roztoku o koncentraci 0,5%? (1 ml odpovídá 1 g)</p>
+                            <input type="number" name="q3" class="table-input w-24 inline-block my-2" placeholder="mg"> mg
+                            <div class="feedback q3-feedback text-sm mt-1"></div>
+                        </div>
+
+                        <!-- Otázka 4: Výpočet základu -->
+                        <div class="border-b pb-4">
+                            <p class="font-semibold text-slate-800 mb-2">4. Pacient zhubl 4 kg, což představuje 5% jeho původní hmotnosti. Jaká byla jeho původní hmotnost (kg)?</p>
+                            <input type="number" name="q4" class="table-input w-24 inline-block my-2" placeholder="kg"> kg
+                            <div class="feedback q4-feedback text-sm mt-1"></div>
+                        </div>
+                        
+                        <!-- Otázka 5: Koncentrace NaCl -->
+                        <div class="pb-4">
+                            <p class="font-semibold text-slate-800 mb-2">5. Jak se nazývá 0,9% roztok NaCl, často používaný pro infuze?</p>
+                            <div class="space-y-1">
+                                <label class="block"><input type="radio" name="q5" value="A"> Hypotonický roztok</label>
+                                <label class="block"><input type="radio" name="q5" value="B"> Izotonický roztok</label>
+                                <label class="block"><input type="radio" name="q5" value="C"> Hypertonický roztok</label>
+                            </div>
+                            <div class="feedback q5-feedback text-sm mt-1"></div>
+                        </div>
+
+                    </form>
+                    <div class="mt-8 flex justify-center">
+                        <button id="evaluateTestBtn" class="bg-sky-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-sky-700 transition-colors shadow-lg">Vyhodnotit test</button>
+                    </div>
+                    <div id="testResult" class="mt-6 text-center text-xl font-bold hidden p-4 rounded-lg"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // --- Chart Initializations (Beze změny) ---
+            const tepCtx = document.getElementById('tepChart').getContext('2d');
+            const koncentraceCtx = document.getElementById('koncentraceChart').getContext('2d');
+            const hmotnostCtx = document.getElementById('hmotnostChart').getContext('2d');
+
+            let tepChart = new Chart(tepCtx, {
+                type: 'bar',
+                data: { labels: ['Klidová TF', 'Zátěžová TF'], datasets: [{ label: 'Tepů za minutu', data: [72, 108], backgroundColor: ['#38bdf8', '#ef4444'], borderWidth: 1 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Tepů / min' } } } }
+            });
+
+            let koncentraceChart = new Chart(koncentraceCtx, {
+                type: 'pie',
+                data: { labels: ['Účinná látka (g)', 'Rozpouštědlo (voda/ml)'], datasets: [{ data: [4.5, 495.5], backgroundColor: ['#06b6d4', '#e0f7fa'], hoverOffset: 4 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+            
+            let hmotnostChart = new Chart(hmotnostCtx, {
+                type: 'bar',
+                data: { labels: ['Původní hmotnost', 'Nová hmotnost'], datasets: [{ label: 'Hmotnost (kg)', data: [92, 88.78], backgroundColor: ['#3b82f6', '#10b981'], borderWidth: 1 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Hmotnost (kg)' } } } }
+            });
+
+
+            // --- Helper Functions (Beze změny) ---
+            const calculateAndShow = (formId, resultContainerId, resultTextId, calculation, chartInstance, chartUpdate) => {
+                const form = document.getElementById(formId);
+                const resultContainer = document.getElementById(resultContainerId);
+                const resultText = document.getElementById(resultTextId);
+
+                const performCalculation = (event) => {
+                    if (event) event.preventDefault();
+                    
+                    const inputs = Array.from(form.elements).filter(el => el.tagName === 'INPUT' || el.tagName === 'SELECT');
+                    const values = inputs.map(el => {
+                        if (el.type === 'number') return parseFloat(el.value);
+                        return el.value;
+                    });
+
+                    if (values.some(v => isNaN(v) && typeof v === 'number')) {
+                        resultText.innerHTML = 'Prosím, zadejte platné číselné hodnoty.';
+                        resultContainer.classList.remove('hidden');
+                        return;
+                    }
+                    
+                    const resultData = calculation(...values);
+                    resultText.innerHTML = resultData.text;
+                    resultContainer.classList.remove('hidden');
+
+                    if (chartInstance && chartUpdate) {
+                        chartUpdate(chartInstance, resultData.chartValues);
+                    }
+                };
+
+                form.addEventListener('submit', performCalculation);
+                performCalculation(); // Initial calculation on load
+            };
+
+            // Task 1, 2, 3, 4 - Logika zůstává stejná
+
+            // Task 1: Koncentrace (s aktualizací Pie Chart)
+            calculateAndShow('koncentraceForm', 'vysledekKoncentrace', 'textVysledekKoncentrace', (objem, koncentrace) => {
+                const mnozstvi = objem * (koncentrace / 100);
+                const rozpoustedlo = objem - mnozstvi;
+                
+                return {
+                    text: `V ${objem} ml roztoku s ${koncentrace}% koncentrací je <strong class="font-bold">${mnozstvi.toFixed(2)} g</strong> účinné látky (rozpouštědlo: ${rozpoustedlo.toFixed(2)} ml).<br><small class="text-slate-500">Výpočet: ${objem} ml × (${koncentrace} / 100) = ${mnozstvi.toFixed(2)} g</small>`,
+                    chartValues: [mnozstvi, rozpoustedlo]
+                };
+            }, koncentraceChart, (chart, values) => {
+                chart.data.datasets[0].data = values;
+                chart.data.labels[0] = `Účinná látka (${values[0].toFixed(2)} g)`;
+                chart.data.labels[1] = `Rozpouštědlo (${values[1].toFixed(2)} ml)`;
+                chart.update();
+            });
+
+            // Task 2: Hmotnost (s aktualizací Bar Chart)
+            calculateAndShow('hmotnostForm', 'vysledekHmotnost', 'textVysledekHmotnost', (puvodni, zmena, typ) => {
+                const zmenaKg = puvodni * (zmena / 100);
+                let novaHmotnost;
+                let textZmeny;
+
+                if (typ === 'ubytek') {
+                    novaHmotnost = puvodni - zmenaKg;
+                    textZmeny = `Úbytek o ${zmena}% (${zmenaKg.toFixed(2)} kg)`;
+                } else {
+                    novaHmotnost = puvodni + zmenaKg;
+                    textZmeny = `Přírůstek o ${zmena}% (${zmenaKg.toFixed(2)} kg)`;
+                }
+                
+                return {
+                    text: `${textZmeny} znamená novou hmotnost <strong class="font-bold">${novaHmotnost.toFixed(2)} kg</strong>.<br><small class="text-slate-500">Výpočet: ${puvodni} kg ${typ === 'ubytek' ? '−' : '+'} ${zmenaKg.toFixed(2)} kg = ${novaHmotnost.toFixed(2)} kg</small>`,
+                    chartValues: [puvodni, novaHmotnost]
+                };
+            }, hmotnostChart, (chart, values) => {
+                chart.data.datasets[0].data = values;
+                chart.update();
+            });
+            
+            // Task 3: Tep (s Bar Chart)
+            const vysledekTepContainer = document.getElementById('vysledekTep');
+            const textVysledekTep = document.getElementById('textVysledekTep');
+            
+            const analyzeTep = (event) => {
+                if (event) event.preventDefault();
+                
+                const klidovy = parseFloat(document.getElementById('klidovyTep').value);
+                const zatezovy = parseFloat(document.getElementById('zatezovyTep').value);
+                
+                if (isNaN(klidovy) || isNaN(zatezovy) || klidovy <= 0) {
+                     textVysledekTep.innerHTML = 'Prosím, zadejte platné hodnoty tepové frekvence.';
+                     vysledekTepContainer.classList.remove('hidden');
+                     return;
+                }
+
+                const narust = zatezovy - klidovy;
+                const procentualniNarust = (narust / klidovy) * 100;
+                
+                textVysledekTep.innerHTML = `Nárůst o ${narust} tepů/min představuje zvýšení o <strong class="font-bold">${procentualniNarust.toFixed(1)} %</strong>.<br><small class="text-slate-500">Výpočet: ((${zatezovy} − ${klidovy}) / ${klidovy}) × 100 = ${procentualniNarust.toFixed(1)} %</small>`;
+                vysledekTepContainer.classList.remove('hidden');
+
+                tepChart.data.datasets[0].data = [klidovy, zatezovy];
+                tepChart.update();
+            };
+            document.getElementById('tepForm').addEventListener('submit', analyzeTep);
+            analyzeTep(); // Initial call
+
+            // Task 4: Ředění
+            calculateAndShow('redeniForm', 'vysledekRedeni', 'textVysledekRedeni', (objemL, koncentrace) => {
+                const objemMl = objemL * 1000;
+                const koncentratMl = objemMl * (koncentrace / 100);
+                const vodaMl = objemMl - koncentratMl;
+                return {
+                    text: `Pro přípravu ${objemL} L roztoku je potřeba <strong class="font-bold">${koncentratMl.toFixed(1)} ml</strong> koncentrátu a ${vodaMl.toFixed(1)} ml vody.<br><small class="text-slate-500">Výpočet: (${objemL} L × 1000) × (${koncentrace} / 100) = ${koncentratMl.toFixed(1)} ml</small>`,
+                    chartValues: null
+                };
+            });
+            
+            // --- Cvičení 1: Kontrola převodů (Beze změny) ---
+            document.getElementById('checkPrevodyBtn').addEventListener('click', function() {
+                 const inputs = document.querySelectorAll('#prevodyBody input:not([readonly])');
+                let allCorrect = true;
+                let correctCount = 0;
+
+                inputs.forEach(input => {
+                    const expected = input.getAttribute('data-correct').trim().toLowerCase();
+                    let actual = input.value.trim().toLowerCase();
+
+                    input.classList.remove('incorrect', 'correct');
+
+                    if (input.getAttribute('data-type') !== 'fraction') {
+                        const numActual = parseFloat(actual.replace(',', '.'));
+                        const numExpected = parseFloat(expected);
+                        
+                        if (!isNaN(numActual) && Math.abs(numActual - numExpected) < 0.001) {
+                            input.classList.add('correct');
+                            correctCount++;
+                        } else {
+                            input.classList.add('incorrect');
+                            allCorrect = false;
+                        }
+
+                    } else {
+                        if (actual === expected || (expected === "1" && actual === "1/1")) {
+                            input.classList.add('correct');
+                            correctCount++;
+                        } else {
+                            input.classList.add('incorrect');
+                            allCorrect = false;
+                        }
+                    }
+                });
+
+                const feedback = document.getElementById('prevodyFeedback');
+                feedback.classList.remove('hidden');
+                
+                if (allCorrect) {
+                    feedback.className = 'mt-4 text-center font-bold text-green-700';
+                    feedback.textContent = 'Gratulujeme! Všechny převody jsou správné.';
+                } else {
+                     feedback.className = 'mt-4 text-center font-semibold text-red-700';
+                     feedback.textContent = `Správně máte ${correctCount} z ${inputs.length} chybějících polí. Pokračujte v procvičování!`;
+                }
+            });
+
+            // --- Cvičení 2: Kontrola vizuálních úloh (Beze změny) ---
+            document.getElementById('checkSyringeBtn').addEventListener('click', function() {
+                const inputs = document.querySelectorAll('.syringe-input');
+                let allCorrect = true;
+                let correctCount = 0;
+
+                inputs.forEach(input => {
+                    const expected = parseFloat(input.getAttribute('data-correct'));
+                    const actual = parseFloat(input.value.trim().replace(',', '.'));
+
+                    input.classList.remove('incorrect', 'correct');
+
+                    if (!isNaN(actual) && actual === expected) {
+                        input.classList.add('correct');
+                        correctCount++;
+                    } else {
+                        input.classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                });
+
+                const feedback = document.getElementById('syringeFeedback');
+                feedback.classList.remove('hidden');
+                
+                if (allCorrect) {
+                    feedback.className = 'mt-4 text-center font-bold text-green-700';
+                    feedback.textContent = 'Výborně! Všechny vizuální odhady jsou správné.';
+                } else {
+                     feedback.className = 'mt-4 text-center font-semibold text-red-700';
+                     feedback.textContent = `Správně máte ${correctCount} z ${inputs.length} stříkaček. Pokuste se to opravit.`;
+                }
+            });
+
+            // --- Cvičení 3: Rychlé určení procent (Tabulka) (Beze změny) ---
+            const bases = [33, 150, 8, 500, 240, 75];
+            const percentages = [1, 5, 10, 25, 50, 200];
+            const tbody = document.getElementById('rychleProcentaBody');
+
+            bases.forEach(base => {
+                const row = document.createElement('tr');
+                row.className = 'divide-x divide-slate-200';
+                
+                let html = `<td class="px-2 py-2 whitespace-nowrap text-center font-bold bg-slate-100 sticky left-0 border-r border-slate-200">${base}</td>`;
+
+                percentages.forEach(percent => {
+                    const expectedValue = base * (percent / 100);
+                    const toFixed = (expectedValue % 1 !== 0) ? 2 : 0; 
+                    html += `<td class="px-2 py-2 whitespace-nowrap text-center"><input type="number" step="any" data-base="${base}" data-percent="${percent}" data-correct="${expectedValue.toFixed(toFixed)}" class="table-input w-24"></td>`;
+                });
+                
+                row.innerHTML = html;
+                tbody.appendChild(row);
+            });
+
+            document.getElementById('checkRychleBtn').addEventListener('click', function() {
+                const inputs = document.querySelectorAll('#rychleProcentaBody input');
+                let allCorrect = true;
+                let correctCount = 0;
+                let totalCount = inputs.length;
+
+                inputs.forEach(input => {
+                    const expectedStr = input.getAttribute('data-correct');
+                    const expected = parseFloat(expectedStr);
+                    const actual = parseFloat(input.value.trim().replace(',', '.'));
+
+                    input.classList.remove('incorrect', 'correct');
+
+                    if (!isNaN(actual) && Math.abs(actual - expected) < 0.01) {
+                        input.classList.add('correct');
+                        correctCount++;
+                    } else {
+                        input.classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                });
+
+                const feedback = document.getElementById('rychleFeedback');
+                feedback.classList.remove('hidden');
+                
+                if (allCorrect) {
+                    feedback.className = 'mt-4 text-center font-bold text-green-700';
+                    feedback.textContent = 'Fantastické! Rychlé určení procent máte v malíčku.';
+                } else {
+                     feedback.className = 'mt-4 text-center font-semibold text-red-700';
+                     feedback.textContent = `Správně máte ${correctCount} z ${totalCount} polí. Pamatujte: 1% = děleno 100, 10% = děleno 10.`;
+                }
+            });
+            
+            // --- SEKCE VI: Rozšířené Procvičování (NOVÁ LOGIKA) ---
+
+            const checkRozsireneCviceni = () => {
+                let correctCount = 0;
+                let totalCount = 0;
+                let allCorrect = true;
+
+                // Cvičení 5 (Výpočet základu)
+                document.querySelectorAll('.cv5-input').forEach((input, index) => {
+                    const expected = parseFloat(input.getAttribute('data-correct'));
+                    const actual = parseFloat(input.value.trim().replace(',', '.'));
+                    const feedbackDiv = document.querySelector(`.cv5-feedback-${index + 1}`);
+                    const unit = input.getAttribute('data-unit');
+
+                    input.classList.remove('incorrect', 'correct');
+                    feedbackDiv.textContent = '';
+                    totalCount++;
+
+                    // Pro 3. otázku (30.91) použijeme toleranci 0.02
+                    const tolerance = (index === 2) ? 0.02 : 0.01; 
+
+                    if (!isNaN(actual) && Math.abs(actual - expected) < tolerance) {
+                        input.classList.add('correct');
+                        feedbackDiv.textContent = `Správně! Základ je ${expected.toFixed(unit ? 2 : 0)} ${unit}`;
+                        feedbackDiv.classList.add('text-green-600');
+                        correctCount++;
+                    } else if (!isNaN(actual)) {
+                        input.classList.add('incorrect');
+                        feedbackDiv.textContent = `Chyba. Zkuste to znovu.`;
+                        feedbackDiv.classList.add('text-red-600');
+                        allCorrect = false;
+                    } else {
+                        allCorrect = false;
+                    }
+                });
+
+                // Cvičení 6 (Výpočet procentové části)
+                document.querySelectorAll('.cv6-input').forEach((input, index) => {
+                    const expected = parseFloat(input.getAttribute('data-correct'));
+                    const actual = parseFloat(input.value.trim().replace(',', '.'));
+                    const feedbackDiv = document.querySelector(`.cv6-feedback-${index + 1}`);
+                    const unit = input.getAttribute('data-unit');
+                    
+                    input.classList.remove('incorrect', 'correct');
+                    feedbackDiv.textContent = '';
+                    totalCount++;
+
+                    if (!isNaN(actual) && Math.abs(actual - expected) < 0.01) {
+                        input.classList.add('correct');
+                        feedbackDiv.textContent = `Správně! Výsledek je ${expected.toFixed(unit === 'Kč' ? 1 : 0)} ${unit}`;
+                        feedbackDiv.classList.add('text-green-600');
+                        correctCount++;
+                    } else if (!isNaN(actual)) {
+                        input.classList.add('incorrect');
+                        feedbackDiv.textContent = `Chyba. Zkuste to znovu.`;
+                        feedbackDiv.classList.add('text-red-600');
+                        allCorrect = false;
+                    } else {
+                        allCorrect = false;
+                    }
+                });
+                
+                const overallFeedback = document.getElementById('rozsireneFeedback');
+                overallFeedback.classList.remove('hidden');
+
+                if (correctCount === totalCount) {
+                     overallFeedback.className = 'mt-4 text-center text-xl font-bold text-green-700';
+                     overallFeedback.textContent = 'Perfektní! Zvládáte všechny typy výpočtů.';
+                } else {
+                     overallFeedback.className = 'mt-4 text-center text-lg font-semibold text-red-700';
+                     overallFeedback.textContent = `Správně máte ${correctCount} z ${totalCount} úloh. Opravte označené chyby.`;
+                }
+            };
+
+            document.getElementById('checkCviceniRozsireneBtn').addEventListener('click', checkRozsireneCviceni);
+
+
+            // --- SEKCE VIII: Závěrečný test (Beze změny) ---
+            const correctAnswers = {
+                q1: 'B', // 1/100
+                q2: 'B', // 0.005 * 1000 = 5 ‰
+                q3: 100, // 20 ml * (0.5/100) = 0.1 g = 100 mg
+                q4: 80,  // 4 kg = 5%. 1% = 0.8 kg. 100% = 80 kg.
+                q5: 'B'  // Izotonický roztok
+            };
+
+            document.getElementById('evaluateTestBtn').addEventListener('click', function() {
+                const form = document.getElementById('finalTestForm');
+                const resultDiv = document.getElementById('testResult');
+                let score = 0;
+                let totalQuestions = 5;
+
+                // Reset
+                resultDiv.classList.add('hidden');
+                document.querySelectorAll('.feedback').forEach(div => {
+                    div.textContent = '';
+                    div.classList.remove('text-green-600', 'text-red-600');
+                });
+                document.querySelectorAll('input').forEach(input => input.classList.remove('correct', 'incorrect'));
+                document.querySelectorAll('.space-y-1 label').forEach(label => label.classList.remove('correct', 'incorrect'));
+
+
+                // Check Radio Questions (Q1, Q2, Q5)
+                ['q1', 'q2', 'q5'].forEach(q => {
+                    const selected = form.elements[q].value;
+                    const feedbackDiv = document.querySelector(`.${q}-feedback`);
+                    
+                    if (selected === correctAnswers[q]) {
+                        score++;
+                        feedbackDiv.textContent = 'Správně!';
+                        feedbackDiv.classList.add('text-green-600');
+                        document.querySelector(`input[name="${q}"][value="${selected}"]`).parentElement.classList.add('correct');
+                    } else if (selected) {
+                        feedbackDiv.textContent = `Chyba. Správná odpověď je ${correctAnswers[q]}.`;
+                        feedbackDiv.classList.add('text-red-600');
+                        document.querySelector(`input[name="${q}"][value="${selected}"]`).parentElement.classList.add('incorrect');
+                    }
+                });
+
+                // Check Numeric Questions (Q3, Q4)
+                ['q3', 'q4'].forEach(q => {
+                    const input = form.elements[q];
+                    const actual = parseFloat(input.value.trim().replace(',', '.'));
+                    const expected = correctAnswers[q];
+                    const feedbackDiv = document.querySelector(`.${q}-feedback`);
+
+                    if (!isNaN(actual) && Math.abs(actual - expected) < 0.01) {
+                         score++;
+                         feedbackDiv.textContent = 'Správně!';
+                         feedbackDiv.classList.add('text-green-600');
+                         input.classList.add('correct');
+                    } else if (!isNaN(actual)) {
+                        feedbackDiv.textContent = `Chyba. Správná hodnota je ${expected}.`;
+                        feedbackDiv.classList.add('text-red-600');
+                        input.classList.add('incorrect');
+                    } else {
+                         feedbackDiv.textContent = 'Chybí odpověď.';
+                         feedbackDiv.classList.add('text-red-600');
+                    }
+                });
+
+                // Display Final Result
+                resultDiv.classList.remove('hidden');
+                resultDiv.textContent = `Váš výsledek: ${score} z ${totalQuestions} (${((score / totalQuestions) * 100).toFixed(0)}%)`;
+
+                if (score >= totalQuestions * 0.8) {
+                    resultDiv.className = 'mt-6 text-center text-xl font-bold p-4 rounded-lg bg-green-100 text-green-800';
+                } else if (score >= totalQuestions * 0.5) {
+                    resultDiv.className = 'mt-6 text-center text-xl font-bold p-4 rounded-lg bg-yellow-100 text-yellow-800';
+                } else {
+                    resultDiv.className = 'mt-6 text-center text-xl font-bold p-4 rounded-lg bg-red-100 text-red-800';
+                }
+            });
+            
+        });
+    </script>
+</body>
+</html>
